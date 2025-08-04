@@ -1,0 +1,234 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  /* Dark Mode as Default */
+  --background: #000000;
+  --foreground: #fafbfb;
+  --muted: #909194;
+  --accent: #34d5e3;
+  --accent-weak: rgba(52, 213, 227, 0.1);
+  --accent-medium: rgba(52, 213, 227, 0.3);
+  --brand-background: #a7a7a7;
+  --brand-background-weak: rgba(169, 147, 85, 0.1);
+  --brand-border-medium: rgba(170, 170, 170, 0.3);
+
+  --neutral-background-alpha-medium: rgba(255, 255, 255, 0.05);
+  --neutral-border-alpha-medium: rgba(255, 255, 255, 0.1);
+  --neutral-alpha-medium: rgba(255, 255, 255, 0.2);
+  --neutral-on-background-strong: #fafbfb;
+  --neutral-on-background-weak: #909194;
+
+  --surface-background: rgba(255, 255, 255, 0.03);
+
+  /* Dot styles for dark mode */
+  --dot-color: rgba(255, 255, 255, 0.05);
+  --dot-size: 2px;
+  --dot-spacing: 45px;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  /* Static Spacing */
+  --static-space-1: 0.0625rem;
+  --static-space-2: 0.125rem;
+  --static-space-4: 0.25rem;
+  --static-space-8: 0.5rem;
+  --static-space-12: 0.75rem;
+  --static-space-16: 1rem;
+  --static-space-20: 1.25rem;
+  --static-space-24: 1.5rem;
+  --static-space-32: 2rem;
+  --static-space-40: 2.5rem;
+  --static-space-48: 3rem;
+  --static-space-80: 5rem;
+
+  --responsive-width-s: 32rem;
+  --responsive-width-m: 64rem;
+}
+
+.light {
+  /* Light Mode Overrides */
+  --background: #fafbfb;
+  --foreground: #2c2c2c;
+  --muted: #909194;
+  --accent: #34d5e3;
+  --accent-weak: rgba(52, 213, 227, 0.1);
+  --accent-medium: rgba(52, 213, 227, 0.3);
+  --brand-background: #a7a7a7;
+  --brand-background-weak: rgba(169, 147, 85, 0.1);
+  --brand-border-medium: rgba(170, 170, 170, 0.3);
+
+  --neutral-background-alpha-medium: rgba(0, 0, 0, 0.05);
+  --neutral-border-alpha-medium: rgba(0, 0, 0, 0.1);
+  --neutral-alpha-medium: rgba(0, 0, 0, 0.2);
+  --neutral-on-background-strong: #2c2c2c;
+  --neutral-on-background-weak: #909194;
+
+  --surface-background: rgba(0, 0, 0, 0.03);
+
+  /* Dot styles for light mode */
+  --dot-color: rgba(0, 0, 0, 0.06);
+  --dot-size: 2px;
+  --dot-spacing: 45px;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow: auto;
+  
+  background-image: 
+    radial-gradient(var(--dot-color) var(--dot-size), transparent var(--dot-size)),
+    radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(52, 142, 227, 0.4), transparent 35%);
+  background-size: var(--dot-spacing) var(--dot-spacing), 100% 100%;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+}
+
+/* Typography styles */
+.font-display {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
+
+.font-heading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.font-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* Font sizes */
+.font-s {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.font-l {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.font-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+/* Utility classes */
+.radius-full {
+  border-radius: 9999px;
+}
+
+.radius-m {
+  border-radius: 0.375rem;
+}
+
+.radius-m-4 {
+  border-radius: 0.5rem;
+}
+
+.radius-l {
+  border-radius: 0.75rem;
+}
+
+.shadow-l {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Background pattern */
+.dots-background {
+  background-image: radial-gradient(circle, rgba(250, 251, 251, 0.15) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.4;
+  mask-image: radial-gradient(ellipse 50vh 50vh at 91px 91px, black 40%, transparent 70%);
+}
+
+/* Animations */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-animation {
+  animation: reveal 0.8s ease-out forwards;
+}
+
+/* Gradient mask */
+.gradient-mask {
+  background: linear-gradient(180deg, var(--background) 0%, transparent 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-alpha-medium);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Button improvements */
+.btn-primary {
+  background: var(--surface-background);
+  border: 1px solid var(--neutral-border-alpha-medium);
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--neutral-background-alpha-medium);
+  border-color: var(--neutral-alpha-medium);
+  transform: translateY(-1px);
+}
+
+/* Text selection */
+::selection {
+  background: var(--accent-weak);
+  color: var(--neutral-on-background-strong);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.gradient-text {
+  background: -webkit-linear-gradient(45deg, var(--neutral-on-background-weak), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
