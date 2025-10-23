@@ -21,7 +21,7 @@ export default async function Home() {
 
   if (host.startsWith("discord.")) {
     title = "Discord UID";
-    content = "zPleum_#4163";
+    content = "zPleum.tsx";
   } else if (host.startsWith("mail.")) {
     title = "Contact Email";
     content = "wiraphat.makwong@gmail.com";

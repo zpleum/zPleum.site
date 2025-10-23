@@ -122,12 +122,12 @@ export default function ProjectShowcase() {
 
   return (
     <div
-      className="flex pb-12 gap-8 flex-col min-w-0 w-full relative"
+      className="flex gap-8 flex-col min-w-0 w-full relative"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <div className="flex justify-center min-w-0 w-full relative reveal-animation">
-        <div className="flex px-8 mb-16 gap-12 flex-col min-w-0 w-full relative">
+        <div className="flex px-8 gap-12 flex-col min-w-0 w-full relative">
           <div className="flex gap-8 flex-col min-w-0 w-full relative">
             {/* รูปภาพ transition */}
             <div className="relative w-full h-[320px] sm:h-[400px] md:h-[500px] overflow-hidden">

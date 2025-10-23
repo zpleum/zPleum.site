@@ -4,7 +4,18 @@ import MouseEffect from "@/components/MouseEffect";
 
 export const metadata: Metadata = {
   title: "zPleum - Full Stack Developer",
-  description: "Portfolio showcasing my work as a Full Stack Developer",
+  description: "Portfolio of Wiraphat Makwong, aka Pleum, Full Stack Developer",
+  keywords: [
+    "zPleum",
+    "Wiraphat",
+    "Makwong",
+    "Wiraphat Makwong",
+    "Pleum",
+    "Pluem",
+    "Full Stack Developer",
+    "Portfolio"
+  ],
+  authors: [{ name: "Wiraphat Makwong" }],
 };
 
 export default function RootLayout({

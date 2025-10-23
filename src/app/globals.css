@@ -46,6 +46,22 @@
 
   --responsive-width-s: 32rem;
   --responsive-width-m: 64rem;
+  
+  --color-it-strong: #FF6B6B;
+  --color-it-medium: #FF8787;
+  --color-it-weak: #FFC6C6;
+
+  --color-graphic-strong: #6BCB77;
+  --color-graphic-medium: #8EE3A3;
+  --color-graphic-weak: #C6F2D3;
+
+  --color-programming-strong: #FFD93D;
+  --color-programming-medium: #FFE066;
+  --color-programming-weak: #FFF3B0;
+
+  --color-language-strong: #4D96FF;
+  --color-language-medium: #74B9FF;
+  --color-language-weak: #A3C8FF;
 }
 
 .light {

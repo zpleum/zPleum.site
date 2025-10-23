@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FaGithub, FaDiscord, FaEnvelope, FaFacebook } from "react-icons/fa";
+import { FaGithub, FaDiscord, FaEnvelope, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -53,6 +53,22 @@ export default function Footer() {
             asChild
           >
             <a
+              href="https://www.instagram.com/zpleum.tsx/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+            >
+              <FaInstagram size={16} />
+            </a>
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            className="radius-full hover:bg-[var(--neutral-background-alpha-medium)] p-2"
+            asChild
+          >
+            <a
               href="https://discord.zpleum.site/"
               target="_blank"
               rel="noreferrer"
@@ -69,7 +85,7 @@ export default function Footer() {
             asChild
           >
             <a
-              href="https://mail.zpleum.site/"
+              href="mailto:wiraphat.makwong@gmail.com"
               aria-label="Email"
             >
               <FaEnvelope size={16} />

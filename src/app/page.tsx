@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import ProjectShowcase from "@/components/ProjectShowcase";
+import Skills from "@/components/Skills";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -36,6 +37,16 @@ export default function Home() {
               className="w-full mt-24"
             >
               <ProjectShowcase />
+            </motion.div>
+
+            {/* Skills Showcase with Animation */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="w-full mt-24"
+            >
+              <Skills />
             </motion.div>
           </motion.div>
         </main>
