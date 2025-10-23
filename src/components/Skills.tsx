@@ -72,15 +72,21 @@ const skillCategories: SkillCategory[] = [
 
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState(0);
-  const [colors, setColors] = useState<string[]>([]);
 
   const currentCategory = skillCategories[activeCategory];
+
+  const [colors, setColors] = useState<string[]>(
+    currentCategory.skills.map(() => "#888") // default fallback
+  );
 
   // Update chart bar colors dynamically based on CSS variables
   useEffect(() => {
     const computedColors = currentCategory.skills.map(
-      (skill) => getComputedStyle(document.documentElement).getPropertyValue(skill.colorVar) || "#fff"
-    );
+    (skill) =>
+      typeof window !== "undefined"
+        ? getComputedStyle(document.documentElement).getPropertyValue(skill.colorVar) || "#fff"
+        : "#fff"
+  );
     setColors(computedColors);
   }, [activeCategory, currentCategory.skills]);
 
