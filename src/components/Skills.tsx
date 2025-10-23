@@ -148,7 +148,7 @@ export default function Skills() {
   };
 
   return (
-    <div className="flex flex-col gap-8 w-full h-full p-4">
+    <div className="flex flex-col gap-8 w-full h-auto p-4">
       {/* Category buttons */}
       <div className="flex gap-4">
         {skillCategories.map((cat, idx) => (
