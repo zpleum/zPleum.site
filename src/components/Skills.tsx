@@ -72,22 +72,33 @@ const skillCategories: SkillCategory[] = [
 
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState(0);
-
   const currentCategory = skillCategories[activeCategory];
 
-  const [colors, setColors] = useState<string[]>(
-    currentCategory.skills.map(() => "#888") // default fallback
-  );
+  // fallback color
+  const defaultBarColor = "#888";
+  const defaultTextStrong = "#fafbfb";
+  const defaultTextWeak = "#909194";
 
-  // Update chart bar colors dynamically based on CSS variables
-  useEffect(() => {
-    const computedColors = currentCategory.skills.map(
-    (skill) =>
-      typeof window !== "undefined"
-        ? getComputedStyle(document.documentElement).getPropertyValue(skill.colorVar) || "#fff"
-        : "#fff"
+  const [colors, setColors] = useState<string[]>(
+    currentCategory.skills.map(() => defaultBarColor)
   );
-    setColors(computedColors);
+  const [legendColor, setLegendColor] = useState(defaultTextStrong);
+  const [tooltipTitleColor, setTooltipTitleColor] = useState(defaultTextStrong);
+  const [tooltipBodyColor, setTooltipBodyColor] = useState(defaultTextWeak);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const root = document.documentElement;
+
+      setColors(
+        currentCategory.skills.map(
+          (s) => getComputedStyle(root).getPropertyValue(s.colorVar) || defaultBarColor
+        )
+      );
+      setLegendColor(getComputedStyle(root).getPropertyValue("--neutral-on-background-strong") || defaultTextStrong);
+      setTooltipTitleColor(getComputedStyle(root).getPropertyValue("--neutral-on-background-strong") || defaultTextStrong);
+      setTooltipBodyColor(getComputedStyle(root).getPropertyValue("--neutral-on-background-weak") || defaultTextWeak);
+    }
   }, [activeCategory, currentCategory.skills]);
 
   const data = {
@@ -104,86 +115,69 @@ export default function Skills() {
 
   const options: ChartOptions<'bar'> = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
-        labels: {
-          color: getComputedStyle(document.documentElement).getPropertyValue("--neutral-on-background-strong"),
-        },
+        labels: { color: legendColor },
       },
       tooltip: {
         enabled: true,
-        titleColor: getComputedStyle(document.documentElement).getPropertyValue("--neutral-on-background-strong"),
-        bodyColor: getComputedStyle(document.documentElement).getPropertyValue("--neutral-on-background-weak"),
+        titleColor: tooltipTitleColor,
+        bodyColor: tooltipBodyColor,
         callbacks: {
-          label: function (context: TooltipItem<'bar'>) {
-            return `${context.label}: ${context.raw}%`;
-          },
+          label: (ctx: TooltipItem<'bar'>) => `${ctx.label}: ${ctx.raw}%`,
         },
       },
     },
     scales: {
       x: {
-        ticks: {
-          color: getComputedStyle(document.documentElement).getPropertyValue("--neutral-on-background-strong"),
-        },
-        grid: {
-          color: getComputedStyle(document.documentElement).getPropertyValue("--neutral-background-alpha-medium"),
-        },
+        ticks: { color: legendColor },
+        grid: { color: "rgba(255,255,255,0.05)" },
       },
       y: {
         beginAtZero: true,
         max: 100,
         ticks: {
-          color: getComputedStyle(document.documentElement).getPropertyValue("--neutral-on-background-strong"),
-          callback(this, value) {
-            return value + '%';
-          },
+          color: legendColor,
+          callback: (value) => `${value}%`,
         },
-        grid: {
-          color: getComputedStyle(document.documentElement).getPropertyValue("--neutral-background-alpha-medium"),
-        },
+        grid: { color: "rgba(255,255,255,0.05)" },
       },
     },
   };
 
-    return (
-    <div className="flex flex-col gap-8 w-full p-4">
-
-        {/* Category buttons */}
-        <div className="flex gap-4">
+  return (
+    <div className="flex flex-col gap-8 w-full h-full p-4">
+      {/* Category buttons */}
+      <div className="flex gap-4">
         {skillCategories.map((cat, idx) => (
-            <button
+          <button
             key={cat.category}
             className={`flex rounded-full min-w-0 w-full relative transition-all duration-300 hover:opacity-75 ${
-                idx === activeCategory
+              idx === activeCategory
                 ? "after:absolute after:-bottom-1 after:left-0 after:w-full after:h-1 after:bg-[var(--neutral-on-background-strong)]"
                 : "after:absolute after:-bottom-1 after:left-0 after:w-full after:h-1 after:bg-[var(--neutral-alpha-medium)]"
             }`}
             onClick={() => setActiveCategory(idx)}
-            >
+          >
             <span
-                className={`w-full text-center py-2 ${
+              className={`w-full text-center py-2 ${
                 idx === activeCategory
-                    ? "text-[var(--neutral-on-background-strong)] font-semibold"
-                    : "text-[var(--neutral-on-background-weak)]"
-                }`}
+                  ? "text-[var(--neutral-on-background-strong)] font-semibold"
+                  : "text-[var(--neutral-on-background-weak)]"
+              }`}
             >
-                {cat.category}
+              {cat.category}
             </span>
-            </button>
+          </button>
         ))}
-        </div>
+      </div>
 
-        {/* Chart */}
-        <div className="flex-1 bg-[var(--surface-background)] p-6 rounded-2xl shadow-lg">
-        <Bar
-            data={data}
-            options={options}
-            width={undefined}
-            height={undefined}
-        />
-        </div>
+      {/* Chart */}
+      <div className="flex-1 bg-[var(--surface-background)] p-6 rounded-2xl shadow-lg">
+        <Bar data={data} options={options} />
+      </div>
     </div>
-    );
+  );
 }
