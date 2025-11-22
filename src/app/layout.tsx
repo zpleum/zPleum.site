@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+import SmoothScroll from "@/components/SmoothScroll";
+
 const sovRangBab = localFont({
   src: [
     {
@@ -42,9 +44,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${sovRangBab.variable} ${sovKhongKhanad.variable}`}>
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans antialiased selection:bg-[var(--primary)] selection:text-white">
-        <div className="flex flex-col min-h-screen">
-          {children}
-        </div>
+        <SmoothScroll>
+          <div className="flex flex-col min-h-screen">
+            {children}
+          </div>
+        </SmoothScroll>
       </body>
     </html>
   );
