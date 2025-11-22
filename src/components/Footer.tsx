@@ -71,7 +71,7 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-[var(--border)] text-center md:text-left">
           <p className="text-sm text-[var(--foreground)]/50">
-            &copy; {new Date().getFullYear()} Wiraphat Makwong. All rights reserved.
+            &copy; {new Date().getFullYear()} Wiraphat Makwong. Licensed under MIT License.
           </p>
         </div>
       </div>
@@ -80,3 +80,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
