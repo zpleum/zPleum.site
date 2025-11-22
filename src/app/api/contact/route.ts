@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     // Send email using Resend
     try {
       const data = await resend.emails.send({
-        from: 'Contact Form <contact@ustoola.resend.app>',
+        from: 'Contact Form <contact@zpleum.site>',
         to: 'wiraphat.makwong@gmail.com',
         replyTo: email,
         subject: `Contact Form: ${subject}`,
