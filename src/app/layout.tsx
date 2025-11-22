@@ -1,6 +1,24 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
-import MouseEffect from "@/components/MouseEffect";
+
+const sovRangBab = localFont({
+  src: [
+    {
+      path: "../fonts/SOV_RangBab.ttf",
+    }
+  ],
+  variable: "--font-sov-rangbab",
+});
+
+const sovKhongKhanad = localFont({
+  src: [
+    {
+      path: "../fonts/SOV_KhongKhanad.ttf",
+    }
+  ],
+  variable: "--font-sov-khongkhanad",
+});
 
 export const metadata: Metadata = {
   title: "zPleum - Full Stack Developer",
@@ -9,11 +27,9 @@ export const metadata: Metadata = {
     "zPleum",
     "Wiraphat",
     "Makwong",
-    "Wiraphat Makwong",
-    "Pleum",
-    "Pluem",
     "Full Stack Developer",
-    "Portfolio"
+    "Portfolio",
+    "Web Developer"
   ],
   authors: [{ name: "Wiraphat Makwong" }],
 };
@@ -24,20 +40,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-body">
-        <MouseEffect />
-        <div className="relative min-h-screen flex flex-col">
-          {/* Background pattern */}
-          <div className="fixed inset-0 dots-background pointer-events-none z-0" />
-
-          {/* Gradient mask at top */}
-          <div className="fixed top-0 left-0 right-0 h-20 gradient-mask pointer-events-none z-10" />
-
-          {/* Content */}
-          <div className="relative z-20 flex flex-col min-h-screen">
-            {children}
-          </div>
+    <html lang="en" className={`scroll-smooth ${sovRangBab.variable} ${sovKhongKhanad.variable}`}>
+      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans antialiased selection:bg-[var(--primary)] selection:text-white">
+        <div className="flex flex-col min-h-screen">
+          {children}
         </div>
       </body>
     </html>

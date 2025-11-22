@@ -10,29 +10,31 @@ export default async function Home() {
   if (host.startsWith("github.")) {
     redirect("https://github.com/zPleum");
   }
-  
+
   // Redirect to Facebook profile if accessed through facebook subdomain
   if (host.startsWith("facebook.")) {
     redirect("https://www.facebook.com/wiraphat.makwong");
   }
 
-  let title = "zPleum";
-  let content = "Full Stack Developer";
-
+  // Redirect to Discord profile if accessed through discord subdomain
   if (host.startsWith("discord.")) {
-    title = "Discord UID";
-    content = "zPleum.tsx";
-  } else if (host.startsWith("mail.")) {
-    title = "Contact Email";
-    content = "wiraphat.makwong@gmail.com";
+    redirect("https://discord.com/users/837918998242656267");
   }
+
+  // Redirect to Email if accessed through mail subdomain
+  if (host.startsWith("mail.")) {
+    redirect("mailto:wiraphat.makwong@gmail.com");
+  }
+
+  const title = "zPleum";
+  const content = "Full Stack Developer";
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <Header />
       <div className="flex-1 flex items-center justify-center bg-transparent">
         <main className="w-full max-w-lg mx-auto px-4 sm:px-6 md:px-8">
-          <div 
+          <div
             className="py-8 sm:py-10 md:py-12 px-6 sm:px-8 md:px-12 rounded-xl sm:rounded-2xl backdrop-blur-sm shadow-lg"
             style={{
               backgroundColor: "var(--surface-background)",

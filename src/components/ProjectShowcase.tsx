@@ -1,245 +1,112 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import Image from 'next/image'
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 type Project = {
   title: string;
   description: string;
-  caseStudyUrl: string;
+  tags: string[];
   projectUrl: string;
   image: string;
 };
 
 const projects: Project[] = [
-    {
-      title: "Bonniecraft Minecraft Store",
-      description:
-        "A full-stack e-commerce platform tailored for Minecraft servers, delivering secure payments, robust user authentication, and seamless automated in-game item delivery.",
-      caseStudyUrl: "/project/bonniecraft",
-      projectUrl: "https://bonniecraft.zpleum.site/",
-      image: "/projects/bonniecraft.png",
-    },
-    {
-      title: "zPleumVerify Minecraft Team Verification",
-      description:
-        "zPleumVerify — The Smart & Secure Minecraft Team Verification System with Discord API.",
-      caseStudyUrl: "/project/zpleumverify",
-      projectUrl: "https://zpleumverify.zpleum.site/",
-      image: "/projects/zpleumverify.png",
-    },
-    {
-      title: "zPleumCORE Minecraft Team Verification",
-      description:
-        "zPleumCORE — The Ultimate OP Hacker Shield & Advanced Security for Minecraft Servers The core system built to protect your Minecraft server from OP hackers with real-time detection and blocking, delivering top-tier security so your server stays safe 24/7.",
-      caseStudyUrl: "/project/zpleumcore",
-      projectUrl: "https://zpleumcore.zpleum.site/",
-      image: "/projects/zpleumcore.png",
-    },
+  {
+    title: "Bonniecraft Minecraft Store",
+    description: "A full-stack e-commerce platform tailored for Minecraft servers, delivering secure payments and automated item delivery.",
+    tags: ["Next.js", "TypeScript", "Stripe", "MongoDB"],
+    projectUrl: "https://bonniecraft.zpleum.site/",
+    image: "/projects/bonniecraft.png",
+  },
+  {
+    title: "zPleumVerify",
+    description: "The Smart & Secure Minecraft Team Verification System with Discord API integration.",
+    tags: ["React", "Discord API", "Node.js"],
+    projectUrl: "https://zpleumverify.zpleum.site/",
+    image: "/projects/zpleumverify.png",
+  },
+  {
+    title: "zPleumCORE",
+    description: "Advanced Security for Minecraft Servers. Real-time detection and blocking system.",
+    tags: ["Java", "Minecraft API", "Redis"],
+    projectUrl: "https://zpleumcore.zpleum.site/",
+    image: "/projects/zpleumcore.png",
+  },
 ];
 
-function ProgressIndicators({
-  count,
-  active,
-  onSelect,
-}: {
-  count: number;
-  active: number;
-  onSelect: (idx: number) => void;
-}) {
-  return (
-    <div className="flex px-4 gap-2 justify-center min-w-0 w-full relative">
-      {Array.from({ length: count }).map((_, index) => (
-        <button
-          key={index}
-          type="button"
-          aria-label={`Show project ${index + 1}`}
-          onClick={() => onSelect(index)}
-          className={`flex rounded-full min-w-0 w-full relative cursor-pointer transition-all duration-300 hover:opacity-75 focus:outline-none`}
-          style={{
-            height: "3px",
-            backgroundColor:
-              index === active
-                ? "var(--neutral-on-background-strong)"
-                : "var(--neutral-alpha-medium)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export default function ProjectShowcase() {
-  const [active, setActive] = useState(0);
-  const [displayed, setDisplayed] = useState(0);
-  const [animating, setAnimating] = useState(false);
-  const [direction, setDirection] = useState<"up" | "down">("up");
-  const [paused, setPaused] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Auto-rotate logic
-  useEffect(() => {
-    if (paused) {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      return;
-    }
-    intervalRef.current = setInterval(() => {
-      handleSetActive((active + 1) % projects.length, "up");
-    }, 5000);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-    // eslint-disable-next-line
-  }, [paused, active]);
-
-  // Animation logic
-  function handleSetActive(idx: number, dir: "up" | "down" = "up") {
-    if (idx === active) return;
-    setDirection(dir);
-    setActive(idx);
-    setAnimating(true);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setDisplayed(idx);
-      setAnimating(false);
-    }, 600); // 600ms = duration
-  }
-
-  // Clean up timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
-  const current = projects[displayed];
-  const next = projects[active];
-
-  // Custom transition classes
-  const transitionBase =
-    "absolute inset-0 w-full h-full rounded-2xl shadow-lg object-cover transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)] will-change-transform will-change-opacity";
-
   return (
-    <div
-      className="flex gap-8 flex-col min-w-0 w-full relative"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div className="flex justify-center min-w-0 w-full relative reveal-animation">
-        <div className="flex px-8 gap-12 flex-col min-w-0 w-full relative">
-          <div className="flex gap-8 flex-col min-w-0 w-full relative">
-            {/* รูปภาพ transition */}
-            <div className="relative w-full h-[320px] sm:h-[400px] md:h-[500px] overflow-hidden">
-              {/* รูปเก่า */}
-              <Image
-                key={current.title + "-current"}
-                width={500}
-                height={500}
-                src={current.image}
-                alt={current.title}
-                className={
-                  transitionBase +
-                  " z-10 " +
-                  (animating
-                    ? direction === "up"
-                      ? "opacity-0 translate-y-12 scale-95"
-                      : "opacity-0 -translate-y-12 scale-95"
-                    : "opacity-100 translate-y-0 scale-100")
-                }
-                style={{
-                  pointerEvents: "none",
-                }}
-              />
-              {/* รูปใหม่ (ถ้าเปลี่ยน) */}
-              {animating && (
-                <Image
-                  key={next.title + "-next"}
-                  width={500}
-                  height={500}
-                  src={next.image}
-                  alt={next.title}
-                  className={
-                    transitionBase +
-                    " z-20 " +
-                    (direction === "up"
-                      ? "opacity-100 translate-y-0 scale-100"
-                      : "opacity-100 translate-y-0 scale-100")
-                  }
-                  style={{
-                    pointerEvents: "none",
-                  }}
-                />
-              )}
-            </div>
+    <section id="projects" className="py-24 bg-[var(--muted)]/30">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-[var(--foreground)]">Featured Projects</h2>
+          <p className="text-center text-[var(--foreground)]/60 mb-12 max-w-2xl mx-auto">
+            Here are some of the projects I&apos;ve worked on. Each one was a unique challenge that helped me grow as a developer.
+          </p>
 
-            {/* Progress Indicators */}
-            <div className="flex gap-4 flex-col min-w-0 w-full relative">
-              <ProgressIndicators
-                count={projects.length}
-                active={active}
-                onSelect={(idx) =>
-                  handleSetActive(
-                    idx,
-                    idx > active || (active === projects.length - 1 && idx === 0)
-                      ? "up"
-                      : "down"
-                  )
-                }
-              />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group bg-white rounded-2xl overflow-hidden border border-[var(--border)] hover:shadow-xl transition-all duration-300 flex flex-col"
+              >
+                <div className="relative h-48 overflow-hidden bg-[var(--muted)]">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                </div>
 
-            {/* Project Content */}
-            <div className="flex pt-6 pb-8 px-4 gap-12 flex-col lg:flex-row min-w-0 w-full relative">
-              <div className="flex flex-1 flex-col items-start relative">
-                <h2
-                  className="font-semibold text-2xl lg:text-3xl leading-tight"
-                  style={{
-                    color: "var(--neutral-on-background-strong)",
-                  }}
-                >
-                  {next.title}
-                </h2>
-              </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-0.5 text-xs font-medium bg-[var(--primary)]/10 text-[var(--primary)] rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
-              <div className="flex gap-6 flex-col flex-1 relative">
-                <p
-                  className="text-base leading-relaxed"
-                  style={{
-                    color: "var(--neutral-on-background-weak)",
-                  }}
-                >
-                  {next.description}
-                </p>
+                  <h3 className="text-xl font-bold mb-2 text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
+                    {project.title}
+                  </h3>
 
-                <div className="flex gap-8 flex-wrap relative">
-                  <a
-                    href={next.caseStudyUrl}
-                    className="text-sm font-medium hover:underline underline-offset-4 transition-all duration-200 hover:text-[var(--neutral-on-background-strong)]"
-                    style={{
-                      color: "var(--neutral-on-background-weak)",
-                    }}
-                  >
-                    Read case study
-                  </a>
+                  <p className="text-[var(--foreground)]/70 text-sm mb-6 flex-1 leading-relaxed">
+                    {project.description}
+                  </p>
 
                   <a
-                    href={next.projectUrl}
+                    href={project.projectUrl}
                     target="_blank"
-                    rel="noreferrer"
-                    className="text-sm font-medium hover:underline underline-offset-4 transition-all duration-200 hover:text-[var(--neutral-on-background-strong)]"
-                    style={{
-                      color: "var(--neutral-on-background-weak)",
-                    }}
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-[var(--foreground)] hover:text-[var(--primary)] transition-colors mt-auto"
                   >
-                    View project
+                    View Project <ArrowUpRight size={16} />
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              </motion.div>
+            ))
+            }
+          </div >
+        </motion.div >
+      </div >
+    </section >
   );
 }

@@ -1,98 +1,82 @@
-import { Button } from "@/components/ui/button";
-import { FaGithub, FaDiscord, FaEnvelope, FaFacebook, FaInstagram } from "react-icons/fa";
+import React from "react";
+import { Github, Linkedin, Mail, Facebook, Instagram, MessageCircle } from "lucide-react";
 
-export default function Footer() {
+const Footer = () => {
   return (
-    <footer className="flex p-2 flex-col sm:flex-row justify-center min-w-0 w-full relative">
-      <div
-        className="flex px-4 py-2 gap-4 justify-between items-center w-full relative"
-        style={{ maxWidth: "var(--responsive-width-m)" }}
-      >
-        <span className="font-body font-s" style={{ color: "var(--neutral-on-background-strong)" }}>
-          <span style={{ color: "var(--neutral-on-background-weak)" }}>© {`2025${new Date().getFullYear() > 2025 ? '-' + new Date().getFullYear() : ''}`} /</span>
-          <span className="px-1">zPleum (Wiraphat Makwong)</span>
-        </span>
+    <footer className="bg-white border-t border-[var(--border)] py-12 mt-auto">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <span className="text-4xl font-bold text-[var(--foreground)] tracking-tight font-[family-name:var(--font-sov-rangbab)]">zPleum</span>
+            <p className="text-sm text-[var(--foreground)]/60">
+              Building digital experiences with purpose.
+            </p>
+          </div>
 
-        <div className="flex gap-4 relative">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="radius-full hover:bg-[var(--neutral-background-alpha-medium)] p-2"
-            asChild
-          >
+          <div className="flex items-center gap-6">
             <a
-              href="https://github.zpleum.site/"
+              href="https://github.com/zPleum"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
               aria-label="GitHub"
             >
-              <FaGithub size={16} />
+              <Github size={20} />
             </a>
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="sm"
-            className="radius-full hover:bg-[var(--neutral-background-alpha-medium)] p-2"
-            asChild
-          >
             <a
-              href="https://facebook.zpleum.site/"
+              href="https://linkedin.com/in/wiraphat-makwong"
               target="_blank"
-              rel="noreferrer"
-              aria-label="Facebook"
+              rel="noopener noreferrer"
+              className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
+              aria-label="LinkedIn"
             >
-              <FaFacebook size={16} />
+              <Linkedin size={20} />
             </a>
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="sm"
-            className="radius-full hover:bg-[var(--neutral-background-alpha-medium)] p-2"
-            asChild
-          >
             <a
-              href="https://www.instagram.com/zpleum.tsx/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram"
-            >
-              <FaInstagram size={16} />
-            </a>
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="sm"
-            className="radius-full hover:bg-[var(--neutral-background-alpha-medium)] p-2"
-            asChild
-          >
-            <a
-              href="https://discord.zpleum.site/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Discord"
-            >
-              <FaDiscord size={16} />
-            </a>
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="sm"
-            className="radius-full hover:bg-[var(--neutral-background-alpha-medium)] p-2"
-            asChild
-          >
-            <a
-              href="mailto:wiraphat.makwong@gmail.com"
+              href="mailto:contact@zpleum.site"
+              className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
               aria-label="Email"
             >
-              <FaEnvelope size={16} />
+              <Mail size={20} />
             </a>
-          </Button>
+            <a
+              href="https://www.facebook.com/wiraphat.makwong"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--foreground)]/70 hover:text-[#1877F2] transition-colors"
+              aria-label="Facebook"
+            >
+              <Facebook size={20} />
+            </a>
+            <a
+              href="https://www.instagram.com/zpleum.tsx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--foreground)]/70 hover:text-[#E4405F] transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram size={20} />
+            </a>
+            <a
+              href="https://discord.com/users/837918998242656267"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--foreground)]/70 hover:text-[#5865F2] transition-colors"
+              aria-label="Discord"
+            >
+              <MessageCircle size={20} />
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-[var(--border)] text-center md:text-left">
+          <p className="text-sm text-[var(--foreground)]/50">
+            &copy; {new Date().getFullYear()} Wiraphat Makwong. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

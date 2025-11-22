@@ -1,94 +1,175 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+"use client";
+
+import React from "react";
 import Image from "next/image";
-import { FaLongArrowAltRight } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { ArrowRight, Sparkles } from "lucide-react";
 
-export default function HeroSection() {
+const HeroSection = () => {
   return (
-    <div className="flex py-12 gap-8 flex-col min-w-0 w-full relative">
-      <div
-        className="flex flex-col w-full relative mx-auto"
-        style={{ maxWidth: "var(--responsive-width-m)" }}
-      >
-        {/* Badge */}
-        <div className="flex pl-3 pt-6 pb-12 justify-start min-w-0 w-full relative reveal-animation">
-          <div
-            className="flex px-4 py-2 items-center w-fit shadow-lg relative font-medium text-sm rounded-full backdrop-blur-sm"
-            style={{
-              backgroundColor: "var(--brand-background-weak)",
-              border: "1px solid var(--brand-border-medium)",
-              color: "var(--neutral-on-background-strong)"
-            }}
-          >
-            I&apos;m: <strong className="ml-1">Full Stack Developer</strong>
-          </div>
-        </div>
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 py-24">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+      </div>
 
-        {/* Main Heading */}
-        <div className="flex pb-6 justify-start min-w-0 w-full relative reveal-animation">
-          <div className="relative w-full flex items-center">
-            <h1
-              className="font-bold leading-tight tracking-tight z-10"
-              style={{
-                color: "var(--neutral-on-background-strong)",
-                fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                lineHeight: "1.1"
-              }}
-            >
-              Crafting Bold Systems & Meaningful Web Experiences
-            </h1>
+      {/* Floating Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -100, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-400/30 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            x: [0, -100, 0],
+            y: [0, 100, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/30 rounded-full blur-3xl"
+        />
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16"
+      >
+        {/* Profile Image - Left Side */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative group"
+        >
+          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white shadow-2xl">
             <Image
               src="/profile.png"
               alt="Profile"
-              className="absolute right-0 top-1/2 -translate-y-1/2 w-100 h-100 rounded-full object-cover opacity-80 pointer-events-none select-none ring-4 ring-white/20 hidden sm:block"
-              width={100}
-              height={100}
+              fill
+              className="object-cover"
+              priority
             />
           </div>
-        </div>
+        </motion.div>
 
-        {/* Subtitle */}
-        <div className="flex pb-12 justify-start min-w-0 w-full relative reveal-animation">
-          <p
-            className="text-xl leading-relaxed gradient-text bg-[#34D5E3]/10"
-            style={{
-              color: "var(--neutral-on-background-weak)"
-            }}
+        {/* Text Content - Right Side */}
+        <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium bg-white/80 backdrop-blur-sm border border-blue-200 rounded-full shadow-lg"
           >
-            I&apos;m zPleum, a developer who designs systems that work because I make them work.
-          </p>
-        </div>
+            <Sparkles size={16} className="text-blue-600" />
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Full Stack Developer
+            </span>
+          </motion.div>
 
-        {/* CTA Button */}
-        <div className="flex pl-3 pt-4 justify-start min-w-0 w-full relative reveal-animation">
-          <Button
-            size="lg"
-            className="px-6 py-3 text-base font-medium rounded-full relative group transition-all duration-200"
-            style={{
-              backgroundColor: "var(--surface-background)",
-              border: "1px solid var(--neutral-border-alpha-medium)",
-              color: "var(--neutral-on-background-strong)"
-            }}
-            asChild
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 tracking-tight leading-tight"
           >
-            <Link href="/about">
-              <span className="flex items-center gap-2">
-                <Image
-                  src="/profile.png"
-                  alt="Profile"
-                  className="w-7 h-7 rounded-full object-cover"
-                  width={28}
-                  height={28}
-                />
-                About – zPleum
-                <div className="group-hover:pl-2 transition-all duration-200">
-                  <FaLongArrowAltRight />
-                </div>
-              </span>
-            </Link>
-          </Button>
+            Crafting{" "}
+            <span className="font-[family-name:var(--font-sov-khongkhanad)] bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
+              Beautiful
+            </span>
+            <br className="hidden md:block" />
+            Digital Experiences
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed"
+          >
+            Hi, I&apos;m <span className="font-semibold text-gray-900">Wiraphat Makwong</span>.
+            I build accessible, pixel-perfect, and performant web applications that solve real-world problems with elegant solutions.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center w-full sm:w-auto"
+          >
+            <a
+              href="/project"
+              className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 flex items-center gap-2 overflow-hidden"
+            >
+              <span className="relative z-10">View Projects</span>
+              <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            <a
+              href="/contact"
+              className="px-8 py-4 bg-white/80 backdrop-blur-sm text-gray-900 border-2 border-gray-200 font-semibold rounded-full hover:bg-white hover:border-blue-300 hover:shadow-lg transition-all duration-300"
+            >
+              Contact Me
+            </a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="flex gap-8 mt-12 pt-8 border-t border-gray-200"
+          >
+            <div className="text-center md:text-left">
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">5+</div>
+              <div className="text-sm text-gray-600">Years Experience</div>
+            </div>
+            <div className="text-center md:text-left">
+              <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">50+</div>
+              <div className="text-sm text-gray-600">Projects Completed</div>
+            </div>
+            <div className="text-center md:text-left">
+              <div className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-blue-600 bg-clip-text text-transparent">100%</div>
+              <div className="text-sm text-gray-600">Client Satisfaction</div>
+            </div>
+          </motion.div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-1.5 h-3 bg-gray-400 rounded-full mt-2"
+          />
+        </motion.div>
+      </motion.div>
+    </section>
   );
-}
+};
+
+export default HeroSection;
