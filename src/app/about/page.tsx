@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Facebook, MessageCircle, Mail, Code, Briefcase, Award, MapPin, Languages, Sparkles, Zap, Heart, GraduationCap, Rocket, Coffee, Music, Gamepad2, BookOpen, Target, TrendingUp } from "lucide-react";
+import { Github, Facebook, MessageCircle, Mail, Code, Briefcase, Award, MapPin, Languages, Sparkles, Zap, Heart, Rocket, Coffee, Music, Gamepad2, BookOpen, Target, TrendingUp } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -84,17 +84,6 @@ const stats = [
     description: "Happy clients",
     subtitle: "Quality guaranteed"
   },
-];
-
-const education = [
-  {
-    degree: "Computer Science",
-    school: "Self-Taught Developer",
-    period: "2019 - Present",
-    description: "Continuous learning through online courses, documentation, and hands-on projects.",
-    icon: GraduationCap,
-    color: "from-blue-500 to-cyan-500"
-  }
 ];
 
 const interests = [
@@ -378,13 +367,13 @@ export default function About() {
             <h2 className="text-4xl font-bold text-[var(--foreground)] mb-6">About Me</h2>
             <div className="space-y-4 text-lg text-[var(--foreground-muted)] leading-relaxed">
               <p>
-                Hello! I'm Wiraphat, a passionate full-stack developer based in Thailand. My journey into the world of programming began in 2019, and since then, I've been captivated by the endless possibilities that code can create.
+                Hello! I&apos;m Wiraphat, a passionate full-stack developer based in Thailand. My journey into the world of programming began in 2019, and since then, I&apos;ve been captivated by the endless possibilities that code can create.
               </p>
               <p>
-                I specialize in building modern, scalable web applications using cutting-edge technologies. My expertise spans across frontend frameworks like React and Next.js, backend development with Node.js, and database management with MySQL. I'm particularly passionate about creating intuitive user experiences and writing clean, maintainable code.
+                I specialize in building modern, scalable web applications using cutting-edge technologies. My expertise spans across frontend frameworks like React and Next.js, backend development with Node.js, and database management with MySQL. I&apos;m particularly passionate about creating intuitive user experiences and writing clean, maintainable code.
               </p>
               <p>
-                When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or enjoying a good cup of coffee while reading tech blogs. I believe in continuous learning and always strive to stay updated with the latest industry trends and best practices.
+                When I&apos;m not coding, you&apos;ll find me exploring new technologies, contributing to open-source projects, or enjoying a good cup of coffee while reading tech blogs. I believe in continuous learning and always strive to stay updated with the latest industry trends and best practices.
               </p>
             </div>
           </div>

@@ -17,7 +17,7 @@ export default function TurnstileCaptcha({ onSuccess, onError, onExpire }: Turns
         onSuccess(token);
     };
 
-    const handleError = (error?: Error | any) => {
+    const handleError = (error?: Error | unknown) => {
         console.error('Turnstile error:', error);
         if (onError) {
             onError();

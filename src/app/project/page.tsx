@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowUpRight, Github, ExternalLink, Sparkles } from "lucide-react";
+import { ArrowRight, Github, ExternalLink, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 type Project = {
@@ -240,29 +240,57 @@ export default function Projects() {
             <p className="text-xl text-[var(--foreground-muted)]">No projects found in this category.</p>
           </motion.div>
         )}
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-20 text-center bg-[var(--card-bg)]/80 backdrop-blur-sm rounded-2xl p-12 shadow-xl border border-[var(--border)]"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
-            Interested in Working Together?
-          </h2>
-          <p className="text-lg text-[var(--foreground-muted)] mb-8 max-w-2xl mx-auto">
-            I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-full hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105 transition-all duration-300"
-          >
-            <span>Get In Touch</span>
-            <ArrowUpRight size={20} />
-          </a>
-        </motion.div>
       </main>
+
+      {/* CTA Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="mt-20 text-center w-full"
+      >
+
+        <section id="contact" className="relative py-32 overflow-hidden">
+          {/* Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+          </div>
+
+          <div className="relative z-10 container mx-auto px-4 text-center">
+            <div className="max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white">
+                <span>💼</span>
+                <span>Available for Work</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+                Let&apos;s Work Together
+              </h2>
+
+              <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed">
+                I&apos;m currently available for freelance work and full-time opportunities.
+                If you have a project that needs some creative touch, I&apos;d love to hear about it.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a
+                  href="/contact"
+                  className="group px-10 py-4 bg-white text-purple-600 font-bold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                >
+                  Get In Touch
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a
+                  href="mailto:wiraphat.makwong@gmail.com"
+                  className="px-10 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 font-bold rounded-full hover:bg-white/20 transition-all duration-300"
+                >
+                  Send Email
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </motion.div>
     </div>
   );
 }
