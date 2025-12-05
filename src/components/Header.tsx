@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Github, Linkedin, Mail, Facebook } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,7 +33,7 @@ const Header = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-white/90 backdrop-blur-md border-b border-[var(--border)] py-3 shadow-sm"
+          ? "bg-[var(--background)]/90 backdrop-blur-md border-b border-[var(--border)] py-3 shadow-sm"
           : "bg-transparent py-5"
           }`}
       >
@@ -60,6 +61,7 @@ const Header = () => {
 
           {/* Social & Mobile Toggle */}
           <div className="flex items-center gap-4">
+            {/* Social Links */}
             <div className="hidden md:flex items-center gap-3">
               <a
                 href="https://github.com/zPleum"
@@ -85,6 +87,14 @@ const Header = () => {
               >
                 <Facebook size={20} />
               </a>
+            </div>
+
+            {/* Divider */}
+            <div className="hidden md:block w-px h-6 bg-[var(--border)]"></div>
+
+            {/* Theme Toggle */}
+            <div className="hidden md:block">
+              <ThemeToggle />
             </div>
 
             <button
@@ -114,7 +124,7 @@ const Header = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[280px] bg-white shadow-2xl z-50 md:hidden flex flex-col"
+              className="fixed top-0 right-0 bottom-0 w-[280px] bg-[var(--background)] shadow-2xl z-50 md:hidden flex flex-col"
             >
               <div className="p-5 flex items-center justify-between border-b border-[var(--border)]">
                 <span className="font-bold text-lg text-[var(--foreground)]">Menu</span>
@@ -143,37 +153,48 @@ const Header = () => {
               </div>
 
               <div className="p-6 border-t border-[var(--border)]">
-                <div className="flex justify-center gap-6">
-                  <a
-                    href="https://github.com/zPleum"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
-                  >
-                    <Github size={24} />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/wiraphat-makwong"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
-                  >
-                    <Linkedin size={24} />
-                  </a>
-                  <a
-                    href="mailto:contact@zpleum.site"
-                    className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
-                  >
-                    <Mail size={24} />
-                  </a>
-                  <a
-                    href="https://www.facebook.com/wiraphat.makwong"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[var(--foreground)]/70 hover:text-[#1877F2] transition-colors"
-                  >
-                    <Facebook size={24} />
-                  </a>
+                <div className="flex flex-col gap-4">
+                  {/* Social Links */}
+                  <div className="flex justify-center gap-6">
+                    <a
+                      href="https://github.com/zPleum"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
+                    >
+                      <Github size={24} />
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/wiraphat-makwong"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
+                    >
+                      <Linkedin size={24} />
+                    </a>
+                    <a
+                      href="mailto:contact@zpleum.site"
+                      className="text-[var(--foreground)]/70 hover:text-[var(--primary)] transition-colors"
+                    >
+                      <Mail size={24} />
+                    </a>
+                    <a
+                      href="https://www.facebook.com/wiraphat.makwong"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[var(--foreground)]/70 hover:text-[#1877F2] transition-colors"
+                    >
+                      <Facebook size={24} />
+                    </a>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="w-full h-px bg-[var(--border)]"></div>
+
+                  {/* Theme Toggle */}
+                  <div className="flex justify-center">
+                    <ThemeToggle />
+                  </div>
                 </div>
               </div>
             </motion.div>

@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { X, Image as ImageIcon } from "lucide-react";
@@ -42,10 +40,9 @@ export default function Gallery() {
 
   return (
     <>
-      <Header />
       <div className="relative min-h-screen overflow-hidden">
         {/* Animated Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)]">
           <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
         </div>
 
@@ -85,8 +82,8 @@ export default function Gallery() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium bg-white/80 backdrop-blur-sm border border-blue-200 rounded-full shadow-lg">
-              <ImageIcon size={16} className="text-blue-600" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium bg-[var(--card-bg)]/80 backdrop-blur-sm border border-[var(--accent-blue)]/30 rounded-full shadow-lg">
+              <ImageIcon size={16} className="text-[var(--accent-blue)]" />
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Visual Showcase
               </span>
@@ -98,7 +95,7 @@ export default function Gallery() {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-[var(--foreground-muted)] max-w-2xl mx-auto leading-relaxed">
               A visual collection of my work, projects, and creative endeavors.
             </p>
           </motion.div>
@@ -116,7 +113,7 @@ export default function Gallery() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${selectedCategory === category
                   ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/50"
-                  : "bg-white/80 backdrop-blur-sm text-gray-700 hover:bg-white hover:shadow-md"
+                  : "bg-[var(--card-bg)]/80 backdrop-blur-sm text-[var(--foreground)] hover:bg-[var(--card-bg)] hover:shadow-md border border-[var(--border)]"
                   }`}
               >
                 {category}
@@ -135,7 +132,7 @@ export default function Gallery() {
                 className="break-inside-avoid group relative cursor-pointer"
                 onClick={() => setSelectedImage(index)}
               >
-                <div className="relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/50">
+                <div className="relative overflow-hidden rounded-2xl bg-[var(--card-bg)]/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-300 border border-[var(--border)]">
                   <div className="relative aspect-[4/3]">
                     <Image
                       src={image.src}
@@ -164,7 +161,7 @@ export default function Gallery() {
               animate={{ opacity: 1 }}
               className="text-center py-20"
             >
-              <p className="text-xl text-gray-600">No images found in this category.</p>
+              <p className="text-xl text-[var(--foreground-muted)]">No images found in this category.</p>
             </motion.div>
           )}
         </main>
@@ -212,8 +209,6 @@ export default function Gallery() {
           </motion.div>
         </motion.div>
       )}
-
-      <Footer />
     </>
   );
 }

@@ -9,7 +9,7 @@ const HeroSection = () => {
   return (
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 py-24">
       {/* Animated Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)]">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
       </div>
 
@@ -55,7 +55,7 @@ const HeroSection = () => {
           className="relative group"
         >
           <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white shadow-2xl">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-[var(--card-bg)] shadow-2xl">
             <Image
               src="/profile.png"
               alt="Profile"
@@ -72,9 +72,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium bg-white/80 backdrop-blur-sm border border-blue-200 rounded-full shadow-lg"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium bg-[var(--card-bg)]/80 backdrop-blur-sm border border-[var(--accent-blue)]/30 rounded-full shadow-lg"
           >
-            <Sparkles size={16} className="text-blue-600" />
+            <Sparkles size={16} className="text-[var(--accent-blue)]" />
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Full Stack Developer
             </span>
@@ -84,7 +84,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 tracking-tight leading-tight"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--foreground)] mb-6 tracking-tight leading-tight"
           >
             Crafting{" "}
             <span className="font-[family-name:var(--font-sov-khongkhanad)] bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
@@ -98,9 +98,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed"
+            className="text-lg md:text-xl text-[var(--foreground-muted)] mb-8 leading-relaxed"
           >
-            Hi, I&apos;m <span className="font-semibold text-gray-900">Wiraphat Makwong</span>.
+            Hi, I&apos;m <span className="font-semibold text-[var(--foreground)]">Wiraphat Makwong</span>.
             I build accessible, pixel-perfect, and performant web applications that solve real-world problems with elegant solutions.
           </motion.p>
 
@@ -120,7 +120,7 @@ const HeroSection = () => {
             </a>
             <a
               href="/contact"
-              className="px-8 py-4 bg-white/80 backdrop-blur-sm text-gray-900 border-2 border-gray-200 font-semibold rounded-full hover:bg-white hover:border-blue-300 hover:shadow-lg transition-all duration-300"
+              className="px-8 py-4 bg-[var(--card-bg)]/80 backdrop-blur-sm text-[var(--foreground)] border-2 border-[var(--border)] font-semibold rounded-full hover:bg-[var(--card-bg)] hover:border-[var(--accent-blue)] hover:shadow-lg transition-all duration-300"
             >
               Contact Me
             </a>
@@ -131,19 +131,19 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="flex gap-8 mt-12 pt-8 border-t border-gray-200"
+            className="flex gap-8 mt-12 pt-8 border-t border-[var(--border)]"
           >
             <div className="text-center md:text-left">
               <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">5+</div>
-              <div className="text-sm text-gray-600">Years Experience</div>
+              <div className="text-sm text-[var(--foreground-muted)]">Years Experience</div>
             </div>
             <div className="text-center md:text-left">
               <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">50+</div>
-              <div className="text-sm text-gray-600">Projects Completed</div>
+              <div className="text-sm text-[var(--foreground-muted)]">Projects Completed</div>
             </div>
             <div className="text-center md:text-left">
               <div className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-blue-600 bg-clip-text text-transparent">100%</div>
-              <div className="text-sm text-gray-600">Client Satisfaction</div>
+              <div className="text-sm text-[var(--foreground-muted)]">Client Satisfaction</div>
             </div>
           </motion.div>
         </div>
@@ -159,12 +159,12 @@ const HeroSection = () => {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
+          className="w-6 h-10 border-2 border-[var(--foreground)]/40 rounded-full flex justify-center"
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-1.5 h-3 bg-gray-400 rounded-full mt-2"
+            className="w-1.5 h-3 bg-[var(--foreground)]/40 rounded-full mt-2"
           />
         </motion.div>
       </motion.div>

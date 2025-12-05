@@ -1,9 +1,12 @@
+"use client";
+
 import React from "react";
 import { Github, Linkedin, Mail, Facebook, Instagram, MessageCircle } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-[var(--border)] py-12 mt-auto">
+    <footer className="bg-[var(--background)] border-t border-[var(--border)] py-12 mt-auto">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-col items-center md:items-start gap-2">
@@ -14,6 +17,7 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-6">
+            {/* Social Links */}
             <a
               href="https://github.com/zPleum"
               target="_blank"
@@ -66,12 +70,18 @@ const Footer = () => {
             >
               <MessageCircle size={20} />
             </a>
+
+            {/* Divider */}
+            <div className="w-px h-6 bg-[var(--border)]"></div>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-[var(--border)] text-center md:text-left">
           <p className="text-sm text-[var(--foreground)]/50">
-            &copy; {new Date().getFullYear()} Wiraphat Makwong. Licensed under MIT License.
+            &copy; {new Date().getFullYear()} Wiraphat Makwong. All rights reserved.
           </p>
         </div>
       </div>
@@ -80,4 +90,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

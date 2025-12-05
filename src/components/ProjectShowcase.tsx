@@ -60,7 +60,7 @@ export default function ProjectShowcase() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group bg-white rounded-2xl overflow-hidden border border-[var(--border)] hover:shadow-xl transition-all duration-300 flex flex-col"
+                className="group bg-[var(--card-bg)] rounded-2xl overflow-hidden border border-[var(--border)] hover:shadow-xl transition-all duration-300 flex flex-col"
               >
                 <div className="relative h-48 overflow-hidden bg-[var(--muted)]">
                   <Image
@@ -102,11 +102,10 @@ export default function ProjectShowcase() {
                   </a>
                 </div>
               </motion.div>
-            ))
-            }
-          </div >
-        </motion.div >
-      </div >
-    </section >
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }

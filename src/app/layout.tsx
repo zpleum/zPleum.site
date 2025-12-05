@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 import SmoothScroll from "@/components/SmoothScroll";
+import ClientThemeWrapper from "@/components/ClientThemeWrapper";
 
 const sovRangBab = localFont({
   src: [
@@ -42,13 +43,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${sovRangBab.variable} ${sovKhongKhanad.variable}`}>
+    <html lang="en" className={`scroll-smooth ${sovRangBab.variable} ${sovKhongKhanad.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans antialiased selection:bg-[var(--primary)] selection:text-white">
-        <SmoothScroll>
-          <div className="flex flex-col min-h-screen">
-            {children}
-          </div>
-        </SmoothScroll>
+        <ClientThemeWrapper>
+          <SmoothScroll>
+            <div className="flex flex-col min-h-screen">
+              {children}
+            </div>
+          </SmoothScroll>
+        </ClientThemeWrapper>
       </body>
     </html>
   );

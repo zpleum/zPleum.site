@@ -5,12 +5,41 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const { name, email, subject, message } = await request.json();
+    const { name, email, subject, message, captchaToken } = await request.json();
 
     // Validate input
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: 'All fields are required' },
+        { status: 400 }
+      );
+    }
+
+    // Validate captcha token
+    if (!captchaToken) {
+      return NextResponse.json(
+        { error: 'Please complete the captcha verification' },
+        { status: 400 }
+      );
+    }
+
+    // Verify captcha with Cloudflare Turnstile
+    const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        secret: process.env.CLOUDFLARE_SECRET,
+        response: captchaToken,
+      }),
+    });
+
+    const turnstileData = await turnstileResponse.json();
+
+    if (!turnstileData.success) {
+      return NextResponse.json(
+        { error: 'Captcha verification failed. Please try again.' },
         { status: 400 }
       );
     }
